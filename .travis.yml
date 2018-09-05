@@ -1,0 +1,15 @@
+sudo: false
+language: node_js
+cache:
+  directories:
+    - ~/.npm
+    - ~/.cache
+notifications:
+  email: false
+node_js: '8'
+install: npm install
+script:
+  - kcd-scripts validate lint,build-and-test,test:cover
+after_success: kcd-scripts travis-after-success
+branches:
+  only: master

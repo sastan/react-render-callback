@@ -1,0 +1,4 @@
+- [ ] Greenkeeper
+- [ ] travis
+  - [ ] semantic release
+  - [ ] codecov.io

@@ -1,0 +1,29 @@
+{
+  "projectName": "react-render-callback",
+  "projectOwner": "sastan",
+  "repoType": "github",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "sastan",
+      "name": "Sascha Tandel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/514405?v=3",
+      "contributions": [
+        "code",
+        "doc",
+        "infra",
+        "test",
+        "review",
+        "blog",
+        "bug",
+        "example",
+        "ideas",
+        "talk"
+      ]
+    }
+  ]
+}

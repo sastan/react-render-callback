@@ -1,0 +1,66 @@
+{
+  "name": "react-render-callback",
+  "version": "0.0.0-semantically-released",
+  "description": "render anything (Function as Child Component, Render Props, React Elements or Components, ...)",
+  "homepage": "https://github.com/sastan/react-render-callback#readme",
+  "main": "dist/react-render-callback.cjs.js",
+  "module": "dist/react-render-callback.esm.js",
+  "unpkg": "dist/react-render-callback.umd.js",
+  "unpkg:min": "dist/react-render-callback.umd.min.js",
+  "author": "Sascha Tandel <s.tandel@me.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sastan/react-render-callback.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sastan/react-render-callback/issues"
+  },
+  "scripts": {
+    "add-contributor": "kcd-scripts contributors add",
+    "build": "kcd-scripts build --bundle --no-clean --size-snapshot",
+    "lint": "kcd-scripts lint",
+    "test": "kcd-scripts test",
+    "test:watch": "kcd-scripts test --coverage --watch",
+    "test:cover": "kcd-scripts test --coverage",
+    "test:update": "npm test -- --updateSnapshot --coverage",
+    "test:build": "jest --projects other/misc-tests",
+    "build-and-test": "npm run build -s && npm run test:build -s",
+    "validate": "kcd-scripts validate lint,build-and-test,test:cover",
+    "setup": "npm install && npm run validate -s",
+    "precommit": "kcd-scripts precommit"
+  },
+  "peerDependencies": {
+    "react": ">=0.14.9"
+  },
+  "dependencies": {
+    "@babel/runtime-corejs2": "^7.0.0",
+    "react-is": "^16.4.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "ajv": "^6.5.3",
+    "babel-plugin-dynamic-import-node": "^2.1.0",
+    "react": "^16.4.2",
+    "kcd-scripts": "^0.44.0",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-babel": "^4.0.3"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/kcd-scripts/eslint.js"
+  },
+  "eslintIgnore": [
+    "node_modules",
+    "coverage",
+    "dist"
+  ],
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "render props",
+    "render prop",
+    "function as child"
+  ]
+}

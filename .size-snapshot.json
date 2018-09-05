@@ -1,0 +1,31 @@
+{
+  "dist/react-render-callback.cjs.js": {
+    "bundled": 1156,
+    "minified": 695,
+    "gzipped": 394
+  },
+  "dist/react-render-callback.esm.js": {
+    "bundled": 1010,
+    "minified": 592,
+    "gzipped": 344,
+    "treeshaked": {
+      "rollup": {
+        "code": 119,
+        "import_statements": 78
+      },
+      "webpack": {
+        "code": 1169
+      }
+    }
+  },
+  "dist/react-render-callback.umd.min.js": {
+    "bundled": 6596,
+    "minified": 3067,
+    "gzipped": 1083
+  },
+  "dist/react-render-callback.umd.js": {
+    "bundled": 11098,
+    "minified": 4622,
+    "gzipped": 1337
+  }
+}
