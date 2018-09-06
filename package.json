@@ -62,5 +62,8 @@
     "render props",
     "render prop",
     "function as child"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
