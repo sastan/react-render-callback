@@ -5,8 +5,7 @@
   "homepage": "https://github.com/sastan/react-render-callback#readme",
   "main": "dist/react-render-callback.cjs.js",
   "module": "dist/react-render-callback.esm.js",
-  "unpkg": "dist/react-render-callback.umd.js",
-  "unpkg:min": "dist/react-render-callback.umd.min.js",
+  "unpkg": "dist/react-render-callback.umd.min.js",
   "author": "Sascha Tandel <s.tandel@me.com>",
   "license": "MIT",
   "repository": {
@@ -29,6 +28,9 @@
     "validate": "kcd-scripts validate lint,build-and-test,test:cover",
     "setup": "npm install && npm run validate -s",
     "precommit": "kcd-scripts precommit"
+  },
+  "engines": {
+    "node": ">=6.0.0"
   },
   "peerDependencies": {
     "react": ">=0.14.9"
