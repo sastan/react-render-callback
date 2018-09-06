@@ -9,6 +9,9 @@
  *
  * This file is unable to validate the global export.
  */
+
+ /* eslint-disable import/extensions, import/no-unresolved */
+
 import esImport from '../../../dist/react-render-callback.esm'
 
 import cjsImport from '../../../' // picks up the main from package.json

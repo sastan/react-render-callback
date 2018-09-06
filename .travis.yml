@@ -9,7 +9,5 @@ notifications:
 node_js: '8'
 install: npm install
 script:
-  - kcd-scripts validate lint,build-and-test,test:cover
+  - kcd-scripts validate lint,test:cover,build-and-test
 after_success: kcd-scripts travis-after-success
-branches:
-  only: master
