@@ -13,8 +13,9 @@
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
 
-[![size][size-badge]][unpkg-dist] [![gzip size][gzip-badge]][unpkg-dist]
 [![module formats: umd, cjs, and es][module-formats-badge]][unpkg-dist]
+[![umd size][size-badge]][unpkg-dist] [![umd gzip size][gzip-badge]][unpkg-dist]
+
 
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Greenkeeper badge](https://badges.greenkeeper.io/sastan/react-render-callback.svg)](https://greenkeeper.io/)
@@ -170,4 +171,3 @@ MIT
 [emojis]: https://github.com/kentcdodds/all-contributors#emoji-key
 [all-contributors]: https://github.com/kentcdodds/all-contributors
 [use-a-render-prop]: https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce
-[semver]: http://semver.org/
