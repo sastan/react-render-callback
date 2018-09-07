@@ -6,25 +6,29 @@
 
 [![version][version-badge]][package]
 [![MIT License][license-badge]][license]
+[![module formats: umd, cjs, and es][module-formats-badge]][unpkg-dist]
+[![umd size][size-badge]][unpkg-dist]
+[![umd gzip size][gzip-badge]][unpkg-dist]
+
 [![Build Status][build-badge]][build]
 [![Code Coverage][coverage-badge]][coverage]
+[![Maintainability][maintainability-badge]][maintainability]
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
+[![Sponsored by Kenoxa][sponsored-by-badge]][sponsored-by]
 
-[![module formats: umd, cjs, and es][module-formats-badge]][unpkg-dist]
-[![umd size][size-badge]][unpkg-dist] [![umd gzip size][gzip-badge]][unpkg-dist]
-
-[![semantic-release](semantic-release-badge)](semantic-release)
-[![Greenkeeper badge](greenkeeper-badge)](greenkeeper)
+[![Semver][semver-badge]][semver]
+[![semantic-release][semantic-release-badge]][semantic-release]
+[![Greenkeeper badge][greenkeeper-badge]][greenkeeper]
 
 ## The problem
 
-You want your component to support the [`render prop`](render-prop) [pattern]([use-a-render-prop])
+You want your component to support the [`render prop`][render-prop] [pattern][use-a-render-prop]
 and you want to support several different types of values like
-[Function as children](function-as-children),
-a [React.Component](react-component)
+[Function as children][function-as-children],
+a [React.Component][react-component]
 or just plain react elements.
 
 ## This solution
@@ -83,20 +87,20 @@ npm install --save react-render-callback
 
 - `renderable` (optional): anything that can be rendered like a function, a component, or elements
   - invokes stateless function components (SFC) respecting their
-    [`defaultProps`](default-props)
-    - not using [`React.createElement`](create-element)
+    [`defaultProps`][default-props]
+    - not using [`React.createElement`][create-element]
       for improved performance
     - except the SFC has [`propTypes`](typechecking-with-proptypes) and
       `process.env.NODE_ENV` is not `production`, in that case `React.createElement` is used to
-      enable typechecking with [PropTypes](prop-types)
-  - uses [`React.createElement`](create-element)
-    for other [react types](react-is) like
+      enable typechecking with [PropTypes][prop-types]
+  - uses [`React.createElement`][create-element]
+    for other [react types][react-is] like
     [class components](https://reactjs.org/docs/react-component.html),
     [context](https://reactjs.org/docs/context.html) provider or consumer,
     [forward refs](https://reactjs.org/docs/react-api.html#reactforwardref),
     [factories](https://reactjs.org/docs/react-api.html#createfactory), ...
   - gracefully handles other types like string, array,
-    [react elements](create-element), ...
+    [react elements][create-element], ...
 - `props` (optional): to pass to `renderable` (if renderable is a function or react element type)
 
 **returns**
@@ -153,6 +157,7 @@ const App = () => (
 ## Other Solutions
 
 - [`render-props`](https://github.com/donavon/render-props)
+- [`react-render-function`](https://www.npmjs.com/package/react-render-function)
 
 ## Contributors
 
@@ -192,11 +197,17 @@ MIT
 [unpkg-dist]: https://unpkg.com/react-render-callback/dist/
 [module-formats-badge]: https://img.shields.io/badge/module%20formats-umd%2C%20cjs%2C%20es-green.svg?style=flat-square
 [emojis]: https://github.com/kentcdodds/all-contributors#emoji-key
+[maintainability]: https://codeclimate.com/github/sastan/react-render-callback/maintainability
+[maintainability-badge]: https://api.codeclimate.com/v1/badges/bdb9f3ea6d70b6181b33/maintainability
+[sponsored-by]: https://www.kenoxa.com
+[sponsored-by-badge]: https://img.shields.io/badge/Sponsored%20by-Kenoxa-blue.svg
 [all-contributors]: https://github.com/kentcdodds/all-contributors
 [semantic-release]: https://github.com/semantic-release/semantic-release
 [semantic-release-badge]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [greenkeeper]: https://greenkeeper.io/
 [greenkeeper-badge]: https://badges.greenkeeper.io/sastan/react-render-callback.svg
+[semver]: http://semver.org/spec/v2.0.0.html
+[semver-badge]: https://img.shields.io/badge/SemVer-2.0.0-green.svg
 [use-a-render-prop]: https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce
 [default-props]: https://reactjs.org/docs/react-component.html#defaultprops
 [render-prop]: https://reactjs.org/docs/render-props.html
