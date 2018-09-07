@@ -2,7 +2,7 @@
 
 > render anything (Function as Child, Render Props, Components, Elements, ...)
 
-<hr />
+---
 
 [![version][version-badge]][package]
 [![MIT License][license-badge]][license]
@@ -111,9 +111,9 @@ const render = require('react-render-callback')
     [react elements][create-element], ...
 - `props` (optional): to pass to `renderable` (if renderable is a function or react element type)
 - `options` (optional):
-
-  - `cloneElement` (optional, default: `false`): allows to pass props to
+  - `cloneElement` (default: `false`, since: v1.1.0): allows to pass props to
     the element using [`React.cloneElement`][clone-element]
+
 
     ```js
     render(<a href="#bar">bar</a>, {title: 'foo'})
@@ -129,6 +129,8 @@ const render = require('react-render-callback')
 - the value as is for all other values
 
 #### `createRender([ renderable [, options ] ])`
+
+since: v1.1.0
 
 > Returns a function (`(props) => ...`) to render `renderable` with `props`.
 
