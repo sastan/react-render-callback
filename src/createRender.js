@@ -1,7 +1,7 @@
 import {isValidElement, createElement, cloneElement} from 'react'
 
 import isReactComponent from './internal/isReactComponent'
-import maybeFalsy from './internal/maybeFalsy'
+import falsyToNull from './internal/falsyToNull'
 
 export default (renderable, options) => {
   if (isReactComponent(renderable)) {
@@ -9,7 +9,7 @@ export default (renderable, options) => {
   }
 
   if (typeof renderable === 'function') {
-    return maybeFalsy(props =>
+    return falsyToNull(props =>
       renderable({...renderable.defaultProps, ...props}),
     )
   }
@@ -19,5 +19,5 @@ export default (renderable, options) => {
   }
 
   // must be something else
-  return maybeFalsy(() => renderable)
+  return falsyToNull(() => renderable)
 }
