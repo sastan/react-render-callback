@@ -48,7 +48,7 @@ class Component from React.Component {
 }
 ```
 
-View an example live in [codesandbox.io](https://codesandbox.io/s/48k5p1r764).
+View an example in [codesandbox.io](https://codesandbox.io/s/48k5p1r764).
 
 ## Table of Contents
 
@@ -59,6 +59,7 @@ View an example live in [codesandbox.io](https://codesandbox.io/s/48k5p1r764).
 - [Usage](#usage)
   - [API](#api)
   - [Example](#example)
+  - [Advanced Patterns](#advanced-patterns)
 - [Other Solutions](#other-solutions)
 - [Credits](#credits)
 - [Contributors](#contributors)
@@ -101,6 +102,12 @@ const render = require('react-render-callback')
 ```
 
 - `renderable` (optional): anything that can be rendered like a function, a component, or elements
+  - uses [`React.createElement`][create-element]
+    for react types like
+    [class components](https://reactjs.org/docs/react-component.html),
+    [context](https://reactjs.org/docs/context.html) provider or consumer,
+    [forward refs](https://reactjs.org/docs/react-api.html#reactforwardref),
+    [factories](https://reactjs.org/docs/react-api.html#createfactory), ...
   - invokes stateless function components (SFC) respecting their
     [`defaultProps`][default-props]
     - not using [`React.createElement`][create-element]
@@ -108,12 +115,6 @@ const render = require('react-render-callback')
     - except the SFC has [`propTypes`](typechecking-with-proptypes) and
       `process.env.NODE_ENV` is not `production`, in that case `React.createElement` is used to
       enable typechecking with [PropTypes][prop-types]
-  - uses [`React.createElement`][create-element]
-    for other [react types][react-is] like
-    [class components](https://reactjs.org/docs/react-component.html),
-    [context](https://reactjs.org/docs/context.html) provider or consumer,
-    [forward refs](https://reactjs.org/docs/react-api.html#reactforwardref),
-    [factories](https://reactjs.org/docs/react-api.html#createfactory), ...
   - gracefully handles other types like string, array,
     [react elements][create-element], ...
 - `props` (optional): to pass to `renderable` (if renderable is a function or react element type)
@@ -152,8 +153,8 @@ Accepts the same arguments (except `props`) as `render()`. It exists mainly
 to pre-determine (read cache) what type `renderable` is, to prevent these
 checks on every invocation.
 
-Additionally the returned method accepts more than one argument. This allows
-to provide several parameters to the render function.
+Additionally the returned method accepts more than one argument (since: v1.2.0).
+This allows to provide several parameters to the render function.
 
 ```js
 const render = createRender((a, b, c) => ({a, b, c}))
@@ -211,6 +212,89 @@ const App = () => (
     <dt>plain childs - nothing to pass down - maybe just doing some lifecycle stuff</dt>
     <dd><Component><strong>Plain</strong> childs</Component></dd>
   </dl>
+)
+```
+
+### Advanced Patterns
+
+#### Use `options.cloneElement`
+
+[![Edit](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/mj5py581oy)
+
+```js
+class CountSeconds extends React.Component {
+  state = {
+    value: 0,
+  }
+
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      this.setState(({value}) => ({value: value + 1}))
+    }, 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+
+  render() {
+    const {children, render = children} = this.props
+    return renderCallback(render, this.state, {cloneElement: true})
+  }
+}
+
+const DisplayValue = ({prefix = '', value}) => `${prefix}${value}`
+
+const App = () => (
+  <CountSeconds>
+    <DisplayValue prefix="Seconds: " />
+  </CountSeconds>
+)
+```
+
+#### Use `createRender` to pass down several arguments
+
+[![Edit](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/x3j0pxl4lw)
+
+```js
+class CountSeconds extends React.Component {
+  state = {
+    value: 0,
+  }
+
+  reset = () => {
+    this.setState({value: 0})
+  }
+
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      this.setState(({value}) => ({value: value + 1}))
+    }, 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+
+  render() {
+    const {children, render = children} = this.props
+    return createRender(render)(this.state.value, this.reset)
+  }
+}
+
+const DisplayValue = ({prefix = '', value}) => `${prefix}${value}`
+
+const App = () => (
+  <CountSeconds>
+    {(value, reset) => (
+      <React.Fragment>
+        <DisplayValue prefix="Seconds: " value={value} />
+        <button onClick={reset} type="button">
+          reset
+        </button>
+      </React.Fragment>
+    )}
+  </CountSeconds>
 )
 ```
 
@@ -288,4 +372,3 @@ MIT
 [clone-element]: https://reactjs.org/docs/react-api.html#cloneelement
 [typechecking-with-proptypes]: https://reactjs.org/docs/typechecking-with-proptypes.html
 [prop-types]: https://www.npmjs.com/package/prop-types
-[react-is]: https://www.npmjs.com/package/react-is
