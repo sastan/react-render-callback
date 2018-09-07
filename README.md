@@ -60,6 +60,7 @@ View an example live in [codesandbox.io](https://codesandbox.io/s/48k5p1r764).
   - [API](#api)
   - [Example](#example)
 - [Other Solutions](#other-solutions)
+- [Credits](#credits)
 - [Contributors](#contributors)
 - [LICENSE](#license)
 
@@ -156,6 +157,17 @@ const App = () => (
 
 - [`render-props`](https://github.com/donavon/render-props)
 - [`react-render-function`](https://www.npmjs.com/package/react-render-function)
+
+## Credits
+
+A special thanks needs to go to [Kent C. Dodds](https://github.com/kentcdodds) for his great
+video series (
+[egghead.io](https://egghead.io/instructors/kentcdodds),
+[frontendmasters.com](https://frontendmasters.com/teachers/kentcdodds/) and
+[youtube.com](https://www.youtube.com/c/kentcdodds-vids)).
+His projects are either used in this project ([kcd-scripts](https://github.com/kentcdodds/kcd-scripts))
+or are a template for the structure of this project ([downshift](https://github.com/paypal/downshift)).
+Make sure to [subscribe](https://buttondown.email/kentcdodds) to his newsletter.
 
 ## Contributors
 
