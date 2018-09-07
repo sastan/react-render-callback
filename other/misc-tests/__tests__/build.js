@@ -10,13 +10,13 @@
  * This file is unable to validate the global export.
  */
 
- /* eslint-disable import/extensions, import/no-unresolved */
+/* eslint-disable import/extensions, import/no-unresolved */
 
-import esImport from '../../../dist/react-render-callback.esm'
+import * as esImport from '../../../dist/react-render-callback.esm'
 
-import cjsImport from '../../../' // picks up the main from package.json
+import * as cjsImport from '../../../' // picks up the main from package.json
 
-import umdImport from '../../../dist/react-render-callback.umd'
+import * as umdImport from '../../../dist/react-render-callback.umd'
 
 // intentionally left out because you shouldn't ever
 // try to require the ES file in CommonJS
@@ -25,21 +25,42 @@ const cjsRequire = require('../../../') // picks up the main from package.json
 const umdRequire = require('../../../dist/react-render-callback.umd')
 
 test(`import render from 'react-render-callback/dist/react-render-callback.esm'`, () => {
-  expect(esImport).toBeInstanceOf(Function)
+  expect(esImport.default).toBeInstanceOf(Function)
+})
+test(`import {render} from 'react-render-callback/dist/react-render-callback.esm'`, () => {
+  expect(esImport.render).toBeInstanceOf(Function)
+})
+test(`import {createRender} from 'react-render-callback/dist/react-render-callback.esm'`, () => {
+  expect(esImport.createRender).toBeInstanceOf(Function)
 })
 
 test(`import render from 'react-render-callback'`, () => {
-  expect(cjsImport).toBeInstanceOf(Function)
+  expect(cjsImport.default).toBeInstanceOf(Function)
+  expect(cjsImport.render).toBeInstanceOf(Function)
+  expect(cjsImport.createRender).toBeInstanceOf(Function)
+})
+
+test(`import {render} from 'react-render-callback'`, () => {
+  expect(cjsImport.render).toBeInstanceOf(Function)
+})
+test(`import {createRender} from 'react-render-callback'`, () => {
+  expect(cjsImport.createRender).toBeInstanceOf(Function)
 })
 
 test(`import render from 'react-render-callback/dist/react-render-callback.umd'`, () => {
-  expect(umdImport).toBeInstanceOf(Function)
+  expect(umdImport.default).toBeInstanceOf(Function)
+  expect(umdImport.render).toBeInstanceOf(Function)
+  expect(umdImport.createRender).toBeInstanceOf(Function)
 })
 
 test(`const render = require('react-render-callback')`, () => {
   expect(cjsRequire).toBeInstanceOf(Function)
+  expect(cjsRequire.render).toBeInstanceOf(Function)
+  expect(cjsRequire.createRender).toBeInstanceOf(Function)
 })
 
 test(`const render = require('react-render-callback/dist/react-render-callback.umd')`, () => {
   expect(umdRequire).toBeInstanceOf(Function)
+  expect(umdRequire.render).toBeInstanceOf(Function)
+  expect(umdRequire.createRender).toBeInstanceOf(Function)
 })

@@ -1,10 +1,10 @@
 import render from './render'
 import createRender from './createRender'
 
-import Export from '.'
+import * as Export from './esm-entry'
 
 test('the default export is render', () => {
-  expect(Export).toBe(render)
+  expect(Export.default).toBe(render)
 })
 
 test('named export render', () => {

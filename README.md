@@ -82,7 +82,9 @@ npm install --save react-render-callback
 
 ### API
 
-`render([ renderable [, props [, options ] ] ])`:
+#### `render([ renderable [, props [, options ] ] ])`
+
+> renders the given `renderable` with `props`
 
 - `renderable` (optional): anything that can be rendered like a function, a component, or elements
   - invokes stateless function components (SFC) respecting their
@@ -118,6 +120,24 @@ npm install --save react-render-callback
 
 - `null` for `false`, `null`, `undefined`, `NaN` and an empty string
 - the value as is for all other values
+
+#### `createRender([ renderable [, options ] ])`
+
+> Returns a function (`(props) => ...`) to render `renderable` with `props`.
+
+Accepts the same arguments (except `props`) as `render()`. It exists mainly
+to pre-determine (read cache) what type `renderable` is, to prevent these
+checks on every invocation.
+
+This function is available via
+
+```js
+import {createRender} from 'react-render-callback'
+```
+
+```js
+const {createRender} = require('react-render-callback')
+```
 
 ### Example
 
