@@ -302,6 +302,7 @@ const App = () => (
 
 - [`render-props`](https://github.com/donavon/render-props)
 - [`react-render-function`](https://www.npmjs.com/package/react-render-function)
+- [`@macklinu/render-props`](https://www.npmjs.com/package/@macklinu/render-props)
 
 ## Credits
 
