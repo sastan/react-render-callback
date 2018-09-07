@@ -1,6 +1,6 @@
 # react-render-callback
 
-> render anything (Function as Child Component, Render Props, React Elements or Components, ...)
+> render anything (Function as Child, Render Props, Components, Elements, ...)
 
 <hr />
 
@@ -13,12 +13,10 @@
 [![Build Status][build-badge]][build]
 [![Code Coverage][coverage-badge]][coverage]
 [![Maintainability][maintainability-badge]][maintainability]
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
-[![Sponsored by Kenoxa][sponsored-by-badge]][sponsored-by]
 
+[![Sponsored by Kenoxa][sponsored-by-badge]][sponsored-by]
 [![Semver][semver-badge]][semver]
 [![semantic-release][semantic-release-badge]][semantic-release]
 [![Greenkeeper badge][greenkeeper-badge]][greenkeeper]
@@ -192,8 +190,8 @@ MIT
 [prs]: http://makeapullrequest.com
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/sastan/react-render-callback/blob/master/CODE_OF_CONDUCT.md
-[gzip-badge]: http://img.badgesize.io/https://unpkg.com/react-render-callback/dist/react-render-callback.umd.min.js?compression=gzip&label=gzip%20size&style=flat-square
-[size-badge]: http://img.badgesize.io/https://unpkg.com/react-render-callback/dist/react-render-callback.umd.min.js?label=size&style=flat-square
+[gzip-badge]: http://img.badgesize.io/https://unpkg.com/react-render-callback/dist/react-render-callback.umd.min.js?compression=gzip&label=umd%20gzip%20size&style=flat-square
+[size-badge]: http://img.badgesize.io/https://unpkg.com/react-render-callback/dist/react-render-callback.umd.min.js?label=umd%20size&style=flat-square
 [unpkg-dist]: https://unpkg.com/react-render-callback/dist/
 [module-formats-badge]: https://img.shields.io/badge/module%20formats-umd%2C%20cjs%2C%20es-green.svg?style=flat-square
 [emojis]: https://github.com/kentcdodds/all-contributors#emoji-key

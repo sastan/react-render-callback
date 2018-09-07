@@ -1,7 +1,7 @@
 {
   "name": "react-render-callback",
   "version": "0.0.0-semantically-released",
-  "description": "render anything (Function as Child Component, Render Props, React Elements or Components, ...)",
+  "description": "render anything (Function as Child, Render Props, Components, Elements, ...)",
   "homepage": "https://github.com/sastan/react-render-callback#readme",
   "main": "dist/react-render-callback.cjs.js",
   "module": "dist/react-render-callback.esm.js",
