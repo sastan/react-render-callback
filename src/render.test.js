@@ -27,6 +27,21 @@ describe('render([renderable[, props]])', () => {
     expect(render(renderable)).toBe(renderable)
   })
 
+  describe('should return null for', () => {
+    ;[false, null, undefined, NaN, ''].forEach(value => {
+      it(`${value}`, () => {
+        expect(render(value)).toBeNull()
+      })
+    })
+  })
+
+  describe('should return value', () => {
+    ;[true, 0].forEach(value => {
+      it(`${value}`, () => {
+        expect(render(value)).toBe(value)
+      })
+    })
+  })
   it('should create an element for an React.Component', () => {
     class Renderable extends React.Component {
       render() {
@@ -56,6 +71,27 @@ describe('render([renderable[, props]])', () => {
 <Context.Consumer>
   [MockFunction]
 </Context.Consumer>
+`)
+  })
+
+  it('should create an element for a factory (React.createFactory)', () => {
+    const div = React.createFactory('div')
+    expect(render(div, {title: 'foo'})).toMatchInlineSnapshot(`
+<div
+  title="foo"
+/>
+`)
+  })
+
+  it('should create an element for forward ref component (React.forwardRef)', () => {
+    const forwardRef = React.forwardRef((props, ref) => (
+      <div {...props} ref={ref} />
+    ))
+
+    expect(render(forwardRef, {children: 'foo'})).toMatchInlineSnapshot(`
+<ForwardRef>
+  foo
+</ForwardRef>
 `)
   })
 
@@ -135,6 +171,26 @@ Object {
   ],
 }
 `)
+  })
+
+  describe('should check result of called SFC', () => {
+    const SFC = ({value}) => value
+
+    describe('return null for', () => {
+      ;[false, null, undefined, NaN, ''].forEach(value => {
+        it(`${value}`, () => {
+          expect(render(SFC, {value})).toBeNull()
+        })
+      })
+    })
+
+    describe('return value', () => {
+      ;[true, 0].forEach(value => {
+        it(`${value}`, () => {
+          expect(render(SFC, {value})).toBe(value)
+        })
+      })
+    })
   })
 
   describe('in development', () => {

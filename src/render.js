@@ -2,15 +2,23 @@ import {createElement} from 'react'
 
 import isReactComponent from './internal/isReactComponent'
 
+const isFalsy = value =>
+  value == null ||
+  value === false ||
+  value === '' ||
+  (typeof value === 'number' && isNaN(value))
+
+const result = (maybeFunction, props) =>
+  typeof maybeFunction === 'function'
+    ? maybeFunction({...maybeFunction.defaultProps, ...props})
+    : maybeFunction // must be something else
+
 export default (renderable, props) => {
   if (isReactComponent(renderable)) {
     return createElement(renderable, props)
   }
 
-  const element =
-    typeof renderable === 'function'
-      ? renderable({ ...renderable.defaultProps, ...props})
-      : renderable // must be something else
+  const element = result(renderable, props)
 
-  return element === undefined ? null : element
+  return isFalsy(element) ? null : element
 }

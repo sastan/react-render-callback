@@ -20,12 +20,11 @@
     "build": "kcd-scripts build --bundle --no-clean --size-snapshot",
     "lint": "kcd-scripts lint",
     "test": "kcd-scripts test",
-    "test:watch": "kcd-scripts test --coverage --watch",
     "test:cover": "kcd-scripts test --coverage",
     "test:update": "npm test -- --updateSnapshot --coverage",
     "test:build": "jest --projects other/misc-tests",
     "build-and-test": "npm run build -s && npm run test:build -s",
-    "validate": "kcd-scripts validate lint,build-and-test,test:cover",
+    "validate": "kcd-scripts validate lint,test:cover,build-and-test",
     "setup": "npm install && npm run validate -s",
     "precommit": "kcd-scripts precommit"
   },

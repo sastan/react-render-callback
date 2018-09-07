@@ -1,13 +1,13 @@
 {
   "dist/react-render-callback.cjs.js": {
-    "bundled": 1156,
-    "minified": 695,
-    "gzipped": 394
+    "bundled": 1391,
+    "minified": 817,
+    "gzipped": 439
   },
   "dist/react-render-callback.esm.js": {
-    "bundled": 1010,
-    "minified": 592,
-    "gzipped": 344,
+    "bundled": 1245,
+    "minified": 714,
+    "gzipped": 388,
     "treeshaked": {
       "rollup": {
         "code": 119,
@@ -19,13 +19,13 @@
     }
   },
   "dist/react-render-callback.umd.min.js": {
-    "bundled": 6596,
-    "minified": 3067,
-    "gzipped": 1083
+    "bundled": 6878,
+    "minified": 3173,
+    "gzipped": 1124
   },
   "dist/react-render-callback.umd.js": {
-    "bundled": 11098,
-    "minified": 4622,
-    "gzipped": 1337
+    "bundled": 11427,
+    "minified": 4759,
+    "gzipped": 1375
   }
 }
