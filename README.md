@@ -71,12 +71,19 @@ View an example live in [codesandbox.io](https://codesandbox.io/s/48k5p1r764).
 This module is distributed via [npm][npm] which is bundled with [node][node] and
 should be installed as one of your project's `dependencies`:
 
-```
+```sh
 npm install --save react-render-callback
 ```
 
 > This package also depends on `react`. Please make sure you
 > have it installed as well.
+
+The [Universal Module Definition (UMD)](https://github.com/umdjs/umd) is available
+via [unpkg.com](https://unpkg.com/) and exposed as `ReactRenderCallback`.
+
+```html
+<script src="https://unpkg.com/react-render-callback/dist/react-render-callback.umd.min.js"></script>
+```
 
 ## Usage
 
