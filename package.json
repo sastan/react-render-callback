@@ -60,9 +60,9 @@
   ],
   "keywords": [
     "react",
-    "render props",
-    "render prop",
-    "function as child"
+    "render-props",
+    "render-prop",
+    "function-as-child"
   ],
   "publishConfig": {
     "access": "public"
