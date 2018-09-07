@@ -1,7 +1,3 @@
 import isFalsy from './isFalsy'
 
-export default render => props => {
-  const element = render(props)
-
-  return isFalsy(element) ? null : element
-}
+export default value => (isFalsy(value) ? null : value)

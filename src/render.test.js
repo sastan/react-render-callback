@@ -139,6 +139,7 @@ describe('render([renderable[, props]])', () => {
     renderable.mockReturnValueOnce(result)
 
     expect(render(renderable, props)).toBe(result)
+
     expect(renderable.mock).toMatchInlineSnapshot(`
 Object {
   "calls": Array [
@@ -162,6 +163,9 @@ Object {
   ],
 }
 `)
+
+    // should habe passed props as is
+    expect(renderable.mock.calls[0][0]).toBe(props)
   })
 
   it('should invoke function with defaultProps merged', () => {
@@ -218,6 +222,36 @@ Object {
         })
       })
     })
+  })
+
+  it('should invoke function with plain value', () => {
+    const result = Symbol('result')
+
+    const renderable = jest.fn()
+    renderable.mockReturnValueOnce(result)
+
+    expect(render(renderable, 23)).toBe(result)
+    expect(renderable.mock).toMatchInlineSnapshot(`
+Object {
+  "calls": Array [
+    Array [
+      23,
+    ],
+  ],
+  "instances": Array [
+    undefined,
+  ],
+  "invocationCallOrder": Array [
+    3,
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": Symbol(result),
+    },
+  ],
+}
+`)
   })
 
   describe('in development', () => {

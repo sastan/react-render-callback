@@ -1,7 +1,10 @@
 import {isValidElement, createElement, cloneElement} from 'react'
 
-import isReactComponent from './internal/isReactComponent'
+import isPlainObject from 'is-plain-object'
+
+import constant from './internal/constant'
 import falsyToNull from './internal/falsyToNull'
+import isReactComponent from './internal/isReactComponent'
 
 export default (renderable, options) => {
   if (isReactComponent(renderable)) {
@@ -9,9 +12,18 @@ export default (renderable, options) => {
   }
 
   if (typeof renderable === 'function') {
-    return falsyToNull(props =>
-      renderable({...renderable.defaultProps, ...props}),
-    )
+    return (...args) => {
+      const element =
+        args.length === 1 && isPlainObject(args[0])
+          ? renderable(
+              renderable.defaultProps
+                ? {...renderable.defaultProps, ...args[0]}
+                : args[0],
+            )
+          : renderable(...args)
+
+      return falsyToNull(element)
+    }
   }
 
   if (options && options.cloneElement && isValidElement(renderable)) {
@@ -19,5 +31,5 @@ export default (renderable, options) => {
   }
 
   // must be something else
-  return falsyToNull(() => renderable)
+  return constant(falsyToNull(renderable))
 }

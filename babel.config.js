@@ -3,17 +3,15 @@ module.exports = api => {
 
   const babelConfig = require('kcd-scripts/babel')(api)
 
-  if (process.env.BUILD_FORMAT !== 'umd') {
-    babelConfig.plugins.unshift([
-      '@babel/plugin-transform-runtime',
-      {
-        corejs: 2,
-        helpers: true,
-        regenerator: false,
-        useESModules: false,
-      },
-    ])
-  }
+  babelConfig.plugins.unshift([
+    '@babel/plugin-transform-runtime',
+    {
+      helpers: true,
+      regenerator: false,
+      useESModules:
+        process.env.NODE_ENV !== 'test' && process.env.BUILD_FORMAT !== 'cjs',
+    },
+  ])
 
   if (process.env.NODE_ENV === 'test') {
     babelConfig.plugins.unshift('dynamic-import-node')

@@ -3,17 +3,15 @@ module.exports = () => {
 
   const rollupConfig = getRollupConfig()
 
-  if (process.env.BUILD_FORMAT !== 'umd') {
-    replace(rollupConfig.plugins, 'babel', () => {
-      const babel = require('rollup-plugin-babel')
+  replace(rollupConfig.plugins, 'babel', () => {
+    const babel = require('rollup-plugin-babel')
 
-      return babel({
-        exclude: 'node_modules/**',
-        babelrc: true,
-        runtimeHelpers: true,
-      })
+    return babel({
+      exclude: 'node_modules/**',
+      babelrc: true,
+      runtimeHelpers: true,
     })
-  }
+  })
 
   return rollupConfig
 }

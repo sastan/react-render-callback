@@ -139,7 +139,7 @@ const render = require('react-render-callback')
 
 since: v1.1.0
 
-> Returns a function (`(props) => ...`) to render `renderable` with `props`.
+> Returns a function (`(...args) => ...`) to render `renderable` with.
 
 ```js
 // esm
@@ -151,6 +151,22 @@ const {createRender} = require('react-render-callback')
 Accepts the same arguments (except `props`) as `render()`. It exists mainly
 to pre-determine (read cache) what type `renderable` is, to prevent these
 checks on every invocation.
+
+Additionally the returned method accepts more than one argument. This allows
+to provide several parameters to the render function.
+
+```js
+const render = createRender((a, b, c) => ({a, b, c}))
+render(1, 2, 3)
+// -> { a: 1, b: 2, c: 3 }
+```
+
+If only one argument is passed and it is a plain object, that argument is merged
+with (if defined) the `defaultProps` of the `renderable`.
+
+**returns**
+
+a function (`(...args) => ...`)
 
 ### Example
 
