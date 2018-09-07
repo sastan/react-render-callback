@@ -27,6 +27,33 @@ describe('render([renderable[, props]])', () => {
     expect(render(renderable)).toBe(renderable)
   })
 
+  it('should clone element providing additional props', () => {
+    const renderable = <a href="#bar">bar</a>
+    expect(render(renderable, {title: 'foo'}, {cloneElement: true}))
+      .toMatchInlineSnapshot(`
+<a
+  href="#bar"
+  title="foo"
+>
+  bar
+</a>
+`)
+  })
+
+  it('should not clone element by default', () => {
+    const renderable = <a href="#bar">bar</a>
+
+    expect(render(renderable, {title: 'foo'})).toBe(renderable)
+
+    expect(render(renderable, {title: 'foo'})).toMatchInlineSnapshot(`
+<a
+  href="#bar"
+>
+  bar
+</a>
+`)
+  })
+
   describe('should return null for', () => {
     ;[false, null, undefined, NaN, ''].forEach(value => {
       it(`${value}`, () => {

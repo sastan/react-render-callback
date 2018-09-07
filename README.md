@@ -82,7 +82,7 @@ npm install --save react-render-callback
 
 ### API
 
-`render([ renderable [, props ] ])`:
+`render([ renderable [, props [, options ] ] ])`:
 
 - `renderable` (optional): anything that can be rendered like a function, a component, or elements
   - invokes stateless function components (SFC) respecting their
@@ -101,6 +101,18 @@ npm install --save react-render-callback
   - gracefully handles other types like string, array,
     [react elements][create-element], ...
 - `props` (optional): to pass to `renderable` (if renderable is a function or react element type)
+- `options` (optional):
+
+  - `cloneElement` (optional, default: `false`): allows to pass props to
+    the element using [`React.cloneElement`][clone-element]
+
+    ```js
+    render(<a href="#bar">bar</a>, {title: 'foo'})
+    // --> <a href="#bar">bar</a>
+
+    render(<a href="#bar">bar</a>, {title: 'foo'}, {cloneElement: true})
+    // --> <a href="#bar" title="foo">bar</a>
+    ```
 
 **returns**
 
@@ -224,6 +236,7 @@ MIT
 [function-as-children]: https://reactpatterns.com/#function-as-children
 [react-component]: https://reactjs.org/docs/react-component.html
 [create-element]: https://reactjs.org/docs/react-api.html#createelement
+[clone-element]: https://reactjs.org/docs/react-api.html#cloneelement
 [typechecking-with-proptypes]: https://reactjs.org/docs/typechecking-with-proptypes.html
 [prop-types]: https://www.npmjs.com/package/prop-types
 [react-is]: https://www.npmjs.com/package/react-is

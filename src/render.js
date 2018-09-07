@@ -1,4 +1,4 @@
-import {createElement} from 'react'
+import {isValidElement, createElement, cloneElement} from 'react'
 
 import isReactComponent from './internal/isReactComponent'
 
@@ -8,17 +8,29 @@ const isFalsy = value =>
   value === '' ||
   (typeof value === 'number' && isNaN(value))
 
-const result = (maybeFunction, props) =>
-  typeof maybeFunction === 'function'
-    ? maybeFunction({...maybeFunction.defaultProps, ...props})
-    : maybeFunction // must be something else
+const result = (maybeFunction, props, options) => {
+  if (typeof maybeFunction === 'function') {
+    return maybeFunction({...maybeFunction.defaultProps, ...props})
+  }
 
-export default (renderable, props) => {
+  if (
+    options &&
+    options.cloneElement &&
+    props &&
+    isValidElement(maybeFunction)
+  ) {
+    return cloneElement(maybeFunction, props)
+  }
+
+  return maybeFunction // must be something else
+}
+
+export default (renderable, props, options) => {
   if (isReactComponent(renderable)) {
     return createElement(renderable, props)
   }
 
-  const element = result(renderable, props)
+  const element = result(renderable, props, options)
 
   return isFalsy(element) ? null : element
 }
