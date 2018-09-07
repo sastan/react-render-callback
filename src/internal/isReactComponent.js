@@ -1,6 +1,12 @@
-import {isValidElementType} from 'react-is'
+import {
+  REACT_PROVIDER_TYPE,
+  REACT_CONTEXT_TYPE,
+  REACT_FORWARD_REF_TYPE,
+} from './reactSymbols'
 
 export default renderable => {
+  if (renderable == null) return false
+
   const type = typeof renderable
 
   if (type === 'string') return false
@@ -13,5 +19,10 @@ export default renderable => {
     )
   }
 
-  return isValidElementType(renderable)
+  return (
+    type === 'object' &&
+    (renderable.$$typeof === REACT_PROVIDER_TYPE ||
+      renderable.$$typeof === REACT_CONTEXT_TYPE ||
+      renderable.$$typeof === REACT_FORWARD_REF_TYPE)
+  )
 }

@@ -32,11 +32,10 @@
     "node": ">=8.0.0"
   },
   "peerDependencies": {
-    "react": ">=0.14.9"
+    "react": "^0.14.0 || ^15.0.0-0 || ^16.0.0-0"
   },
   "dependencies": {
-    "@babel/runtime-corejs2": "^7.0.0",
-    "react-is": "^16.4.2"
+    "@babel/runtime-corejs2": "^7.0.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.0.0",
