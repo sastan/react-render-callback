@@ -3,36 +3,36 @@ module.exports = () => {
 
   const rollupConfig = getRollupConfig()
 
-  const commonJsIndex = rollupConfig.plugins.findIndex(
-    plugin => plugin.name === 'commonjs',
-  )
-
-  if (commonJsIndex >= 0) {
+  replace(rollupConfig.plugins, 'commonjs', () => {
     const commonjs = require('rollup-plugin-commonjs')
 
-    rollupConfig.plugins[commonJsIndex] = commonjs({
+    return commonjs({
       include: 'node_modules/**',
       namedExports: {
         'react-is': ['isValidElementType'],
       },
     })
-  }
+  })
 
   if (process.env.BUILD_FORMAT !== 'umd') {
-    const babelIndex = rollupConfig.plugins.findIndex(
-      plugin => plugin.name === 'babel',
-    )
-
-    if (babelIndex >= 0) {
+    replace(rollupConfig.plugins, 'babel', () => {
       const babel = require('rollup-plugin-babel')
 
-      rollupConfig.plugins[babelIndex] = babel({
+      return babel({
         exclude: 'node_modules/**',
         babelrc: true,
         runtimeHelpers: true,
       })
-    }
+    })
   }
 
   return rollupConfig
+}
+
+function replace(plugins, name, factory) {
+  const idx = plugins.findIndex(plugin => plugin.name === name)
+
+  if (idx >= 0) {
+    plugins[idx] = factory(plugins[idx])
+  }
 }
