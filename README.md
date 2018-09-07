@@ -86,6 +86,13 @@ npm install --save react-render-callback
 
 > renders the given `renderable` with `props`
 
+```js
+// esm
+import render from 'react-render-callback'
+// commonjs
+const render = require('react-render-callback')
+```
+
 - `renderable` (optional): anything that can be rendered like a function, a component, or elements
   - invokes stateless function components (SFC) respecting their
     [`defaultProps`][default-props]
@@ -125,19 +132,16 @@ npm install --save react-render-callback
 
 > Returns a function (`(props) => ...`) to render `renderable` with `props`.
 
+```js
+// esm
+import {createRender} from 'react-render-callback'
+// commonjs
+const {createRender} = require('react-render-callback')
+```
+
 Accepts the same arguments (except `props`) as `render()`. It exists mainly
 to pre-determine (read cache) what type `renderable` is, to prevent these
 checks on every invocation.
-
-This function is available via
-
-```js
-import {createRender} from 'react-render-callback'
-```
-
-```js
-const {createRender} = require('react-render-callback')
-```
 
 ### Example
 
