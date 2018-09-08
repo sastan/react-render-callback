@@ -48,7 +48,21 @@ class Component from React.Component {
 }
 ```
 
-View an example in [codesandbox.io](https://codesandbox.io/s/48k5p1r764).
+It can render the following types:
+
+- [Stateless Function Components (SFC)](https://reactjs.org/docs/components-and-props.html#functional-and-class-components)
+  with one argument (the common `props` case)
+  or [optional with several arguments](#use-createrender-to-pass-down-several-arguments)
+- [Class Components](https://reactjs.org/docs/react-component.html)
+- [Context](https://reactjs.org/docs/context.html) Provider and Consumer
+- [Forward Refs](https://reactjs.org/docs/react-api.html#reactforwardref)
+- [Factories](https://reactjs.org/docs/react-api.html#createfactory)
+- [Elements](https://reactjs.org/docs/glossary.html#elements)
+  with [optional support](#use-optionscloneelement) for [cloning][clone-element] to merge props
+- primitives like strings, numbers, arrays, ...
+- `false`, `null`, `undefined`, `NaN` and an empty string are coerced to `null`
+
+View an example in [codesandbox.io](https://codesandbox.io/s/48k5p1r764?module=%2FApp.js).
 
 ## Table of Contents
 
@@ -58,8 +72,7 @@ View an example in [codesandbox.io](https://codesandbox.io/s/48k5p1r764).
 - [Installation](#installation)
 - [Usage](#usage)
   - [API](#api)
-  - [Example](#example)
-  - [Advanced Patterns](#advanced-patterns)
+  - [Examples](#examples)
 - [Other Solutions](#other-solutions)
 - [Credits](#credits)
 - [Contributors](#contributors)
@@ -169,53 +182,9 @@ with (if defined) the `defaultProps` of the `renderable`.
 
 a function (`(...args) => ...`)
 
-### Example
+### Examples
 
-```js
-import React from 'react'
-
-import render from 'react-render-callback'
-
-class Component from React.Component {
-  state = {
-    to: 'pass down'
-  }
-
-  render() {
-    // can be any prop: return render(this.props.renderHeader, this.state.header)
-    return render(this.props.render || this.props.children, this.state)
-  }
-}
-
-const functionComponent = (props) => <span>{props.to}</span>
-
-class ClassComponent from React.Component {
-  render() {
-    return <span>{this.props.to}</span>
-  }
-}
-
-const App = () => (
-  <dl>
-    <dt>render prop</dt>
-    <dd><Component render={functionComponent} /></dd>
-
-    <dt>function as a child</dt>
-    <dd><Component>{functionComponent}</Component></dd>
-
-    <dt>render Component</dt>
-    <dd><Component render={ClassComponent} /></dd>
-
-    <dt>component as child</dt>
-    <dd><Component>{ClassComponent}</Component></dd>
-
-    <dt>plain childs - nothing to pass down - maybe just doing some lifecycle stuff</dt>
-    <dd><Component><strong>Plain</strong> childs</Component></dd>
-  </dl>
-)
-```
-
-### Advanced Patterns
+A basic example showing the can be viewed at [codesandbox.io](https://codesandbox.io/s/48k5p1r764?module=%2FApp.js).
 
 #### Use `options.cloneElement`
 
