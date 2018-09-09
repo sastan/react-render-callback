@@ -192,6 +192,9 @@ A basic example showing the can be viewed at [codesandbox.io](https://codesandbo
 
 [![Edit](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/mj5py581oy)
 
+> This option allows to pass down props without to need to create a function
+> within render which merges the parent and received props.
+
 ```js
 class CountSeconds extends React.Component {
   state = {
@@ -216,9 +219,9 @@ class CountSeconds extends React.Component {
 
 const DisplayValue = ({prefix = '', value}) => `${prefix}${value}`
 
-const App = () => (
+const App = ({prefix}) => (
   <CountSeconds>
-    <DisplayValue prefix="Seconds: " />
+    <DisplayValue prefix={prefix} />
   </CountSeconds>
 )
 ```
