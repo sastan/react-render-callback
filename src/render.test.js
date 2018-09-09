@@ -55,7 +55,7 @@ describe('render([renderable[, props]])', () => {
   })
 
   describe('should return null for', () => {
-    ;[false, null, undefined, NaN, ''].forEach(value => {
+    ;[false, null, undefined, true].forEach(value => {
       it(`${value}`, () => {
         expect(render(value)).toBeNull()
       })
@@ -63,7 +63,7 @@ describe('render([renderable[, props]])', () => {
   })
 
   describe('should return value', () => {
-    ;[true, 0].forEach(value => {
+    ;['', 0, NaN].forEach(value => {
       it(`${value}`, () => {
         expect(render(value)).toBe(value)
       })
@@ -208,7 +208,7 @@ Object {
     const SFC = ({value}) => value
 
     describe('return null for', () => {
-      ;[false, null, undefined, NaN, ''].forEach(value => {
+      ;[false, null, undefined, true].forEach(value => {
         it(`${value}`, () => {
           expect(render(SFC, {value})).toBeNull()
         })
@@ -216,7 +216,7 @@ Object {
     })
 
     describe('return value', () => {
-      ;[true, 0].forEach(value => {
+      ;['', 0, NaN].forEach(value => {
         it(`${value}`, () => {
           expect(render(SFC, {value})).toBe(value)
         })

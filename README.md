@@ -60,7 +60,8 @@ It can render the following types:
 - [Elements](https://reactjs.org/docs/glossary.html#elements)
   with [optional support](#use-optionscloneelement) for [cloning][clone-element] to merge props
 - primitives like strings, numbers, arrays, ...
-- `false`, `null`, `undefined`, `NaN` and an empty string are coerced to `null`
+- `false`, `null`, `undefined` and `true` are returned as `null`
+  just like in [JSX](https://reactjs.org/docs/jsx-in-depth.html#booleans-null-and-undefined-are-ignored)
 
 View an example in [codesandbox.io](https://codesandbox.io/s/48k5p1r764?module=%2FApp.js).
 
@@ -146,7 +147,8 @@ const render = require('react-render-callback')
 
 **returns**
 
-- `null` for `false`, `null`, `undefined`, `NaN` and an empty string
+- `false`, `null`, `undefined` and `true` are returned as `null`
+  just like in [JSX](https://reactjs.org/docs/jsx-in-depth.html#booleans-null-and-undefined-are-ignored)
 - the value as is for all other values
 
 #### `createRender([ renderable [, options ] ])`

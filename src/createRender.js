@@ -3,7 +3,7 @@ import {isValidElement, createElement, cloneElement} from 'react'
 import isPlainObject from 'is-plain-object'
 
 import constant from './internal/constant'
-import falsyToNull from './internal/falsyToNull'
+import ignoredValuesToNull from './internal/ignoredValuesToNull'
 import isReactComponent from './internal/isReactComponent'
 
 export default (renderable, options) => {
@@ -14,15 +14,11 @@ export default (renderable, options) => {
   if (typeof renderable === 'function') {
     return (...args) => {
       const element =
-        args.length === 1 && isPlainObject(args[0])
-          ? renderable(
-              renderable.defaultProps
-                ? {...renderable.defaultProps, ...args[0]}
-                : args[0],
-            )
+        renderable.defaultProps && args.length === 1 && isPlainObject(args[0])
+          ? renderable({...renderable.defaultProps, ...args[0]})
           : renderable(...args)
 
-      return falsyToNull(element)
+      return ignoredValuesToNull(element)
     }
   }
 
@@ -31,5 +27,5 @@ export default (renderable, options) => {
   }
 
   // must be something else
-  return constant(falsyToNull(renderable))
+  return constant(ignoredValuesToNull(renderable))
 }
