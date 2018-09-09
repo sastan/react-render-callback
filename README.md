@@ -186,7 +186,7 @@ a function (`(...args) => ...`)
 
 ### Examples
 
-A basic example showing the can be viewed at [codesandbox.io](https://codesandbox.io/s/48k5p1r764?module=%2FApp.js).
+A basic example showing the most common use cases can be viewed/edited at [codesandbox.io](https://codesandbox.io/s/48k5p1r764?module=%2FApp.js).
 
 #### Use `options.cloneElement`
 
