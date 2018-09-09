@@ -6,6 +6,7 @@
   "main": "dist/react-render-callback.cjs.js",
   "module": "dist/react-render-callback.esm.js",
   "unpkg": "dist/react-render-callback.umd.min.js",
+  "typings": "typings/index.d.ts",
   "author": "Sascha Tandel <s.tandel@me.com>",
   "license": "MIT",
   "repository": {
@@ -17,12 +18,13 @@
   },
   "scripts": {
     "add-contributor": "kcd-scripts contributors add",
-    "build": "kcd-scripts build --bundle --no-clean --size-snapshot",
+    "build": "kcd-scripts build --bundle --no-clean --size-snapshot && npm run flowgen",
     "lint": "kcd-scripts lint",
     "test": "kcd-scripts test",
     "test:cover": "kcd-scripts test --coverage",
     "test:update": "npm test -- --updateSnapshot --coverage",
     "test:build": "jest --projects other/misc-tests",
+    "flowgen": "flowgen typings/index.d.ts -o flow-typed/npm/react-render-callback_v1.x.x.js.flow",
     "build-and-test": "npm run build -s && npm run test:build -s",
     "validate": "kcd-scripts validate lint,test:cover,build-and-test",
     "setup": "npm install && npm run validate -s",
@@ -41,8 +43,10 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.0.0",
+    "@types/react": "^16.4.2",
     "ajv": "^6.5.3",
     "babel-plugin-dynamic-import-node": "^2.1.0",
+    "flowgen": "^1.2.2",
     "react": "^16.4.2",
     "kcd-scripts": "^0.44.0",
     "rollup-plugin-commonjs": "^9.1.0",
@@ -57,7 +61,9 @@
     "dist"
   ],
   "files": [
-    "dist"
+    "dist",
+    "flow-typed",
+    "typings"
   ],
   "keywords": [
     "react",
