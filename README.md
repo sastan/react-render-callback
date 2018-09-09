@@ -272,6 +272,30 @@ const App = () => (
 )
 ```
 
+#### Use `createRender` to interop with a library which only supports function as render-prop
+
+[![Edit](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/1qyqwq14jq)
+
+```js
+import Toggle from 'react-toggled'
+
+const Toggler = ({on, getTogglerProps, onLabel, offLabel}) => (
+  <div>
+    <button {...getTogglerProps()}>Toggle me</button>
+    <div>{on ? onLabel : offLabel}</div>
+  </div>
+)
+
+Toggler.defaultProps = {
+  onLabel: 'Toggled On',
+  offLabel: 'Toggled Off',
+}
+
+const ToggleView = createRender(Toggler)
+
+const App = () => <Toggle>{ToggleView}</Toggle>
+```
+
 ## Other Solutions
 
 - [`render-props`](https://github.com/donavon/render-props)
