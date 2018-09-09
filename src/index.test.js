@@ -7,10 +7,6 @@ test('the default export is render', () => {
   expect(Export).toBe(render)
 })
 
-test('named export render', () => {
-  expect(Export.render).toBe(render)
-})
-
 test('named export createRender', () => {
   expect(Export.createRender).toBe(createRender)
 })
