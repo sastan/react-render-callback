@@ -51,9 +51,9 @@ class Component from React.Component {
 It can render the following types:
 
 - [Stateless Function Components (SFC)](https://reactjs.org/docs/components-and-props.html#functional-and-class-components)
-  with one argument (the common `props` case)
+  with one argument (the common `props` case) aka _Render Props Pattern_
   or [optional with several arguments](#use-createrender-to-pass-down-several-arguments)
-- [Class Components](https://reactjs.org/docs/react-component.html)
+- [Class Components](https://reactjs.org/docs/react-component.html) aka _Component Injection Pattern_
 - [Context](https://reactjs.org/docs/context.html) Provider and Consumer
 - [Forward Refs](https://reactjs.org/docs/react-api.html#reactforwardref)
 - [Factories](https://reactjs.org/docs/react-api.html#createfactory)
