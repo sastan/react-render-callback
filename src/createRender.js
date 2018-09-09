@@ -12,14 +12,12 @@ export default (renderable, options) => {
   }
 
   if (typeof renderable === 'function') {
-    return (...args) => {
-      const element =
+    return (...args) =>
+      ignoredValuesToNull(
         renderable.defaultProps && args.length === 1 && isPlainObject(args[0])
           ? renderable({...renderable.defaultProps, ...args[0]})
-          : renderable(...args)
-
-      return ignoredValuesToNull(element)
-    }
+          : renderable(...args),
+      )
   }
 
   if (options && options.cloneElement && isValidElement(renderable)) {
