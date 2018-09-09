@@ -115,35 +115,38 @@ import render from 'react-render-callback'
 const render = require('react-render-callback')
 ```
 
-- `renderable` (optional): anything that can be rendered like a function, a component, or elements
-  - uses [`React.createElement`][create-element]
-    for react types like
-    [class components](https://reactjs.org/docs/react-component.html),
-    [context](https://reactjs.org/docs/context.html) provider or consumer,
-    [forward refs](https://reactjs.org/docs/react-api.html#reactforwardref),
-    [factories](https://reactjs.org/docs/react-api.html#createfactory), ...
-  - invokes stateless function components (SFC) respecting their
-    [`defaultProps`][default-props]
-    - not using [`React.createElement`][create-element]
-      for improved performance
-    - except the SFC has [`propTypes`](typechecking-with-proptypes) and
-      `process.env.NODE_ENV` is not `production`, in that case `React.createElement` is used to
-      enable typechecking with [PropTypes][prop-types]
-  - gracefully handles other types like string, array,
-    [react elements][create-element], ...
-- `props` (optional): to pass to `renderable` (if renderable is a function or react element type)
-- `options` (optional):
-  - `cloneElement` (default: `false`, since: v1.1.0): allows to pass props to
-    the element using [`React.cloneElement`][clone-element]
+**renderable** (optional): anything that can be rendered like a function, a component, or elements
 
+- uses [`React.createElement`][create-element]
+  for react types like
+  [class components](https://reactjs.org/docs/react-component.html),
+  [context](https://reactjs.org/docs/context.html) provider or consumer,
+  [forward refs](https://reactjs.org/docs/react-api.html#reactforwardref),
+  [factories](https://reactjs.org/docs/react-api.html#createfactory), ...
+- invokes stateless function components (SFC) respecting their
+  [`defaultProps`][default-props]
+  - not using [`React.createElement`][create-element]
+    for improved performance
+  - except the SFC has [`propTypes`](typechecking-with-proptypes) and
+    `process.env.NODE_ENV` is not `production`, in that case `React.createElement` is used to
+    enable typechecking with [PropTypes][prop-types]
+- gracefully handles other types like string, array,
+  [react elements][create-element], ...
 
-    ```js
-    render(<a href="#bar">bar</a>, {title: 'foo'})
-    // --> <a href="#bar">bar</a>
+**props** (optional): to pass to `renderable` (if renderable is a function or react element type)
 
-    render(<a href="#bar">bar</a>, {title: 'foo'}, {cloneElement: true})
-    // --> <a href="#bar" title="foo">bar</a>
-    ```
+**options** (optional):
+
+- `cloneElement` (default: `false`, since: v1.1.0): allows to pass props to
+  the element using [`React.cloneElement`][clone-element]
+
+```js
+render(<a href="#bar">bar</a>, {title: 'foo'})
+// --> <a href="#bar">bar</a>
+
+render(<a href="#bar">bar</a>, {title: 'foo'}, {cloneElement: true})
+// --> <a href="#bar" title="foo">bar</a>
+```
 
 **returns**
 
