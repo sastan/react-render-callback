@@ -1,7 +1,5 @@
 import {isValidElement, createElement, cloneElement} from 'react'
 
-import isPlainObject from 'is-plain-object'
-
 import constant from './internal/constant'
 import ignoredValuesToNull from './internal/ignoredValuesToNull'
 import isReactComponent from './internal/isReactComponent'
@@ -14,7 +12,7 @@ export default (renderable, options) => {
   if (typeof renderable === 'function') {
     return (...args) =>
       ignoredValuesToNull(
-        renderable.defaultProps && args.length === 1 && isPlainObject(args[0])
+        renderable.defaultProps
           ? renderable({...renderable.defaultProps, ...args[0]})
           : renderable(...args),
       )
