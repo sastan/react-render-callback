@@ -1,8 +1,6 @@
 # react-render-callback
 
-> render anything (Function as Child, Render Props, Components, Elements, ...)
-
----
+> render-prop helper to render anything (Functions, Components, Elements, ...)
 
 [![version][version-badge]][package]
 [![MIT License][license-badge]][license]
@@ -24,46 +22,54 @@
 ## The problem
 
 You want your component to support the [`render prop`][render-prop] [pattern][use-a-render-prop]
-and you want to support several different types of values like
+with different types of values like
 [Function as children][function-as-children],
-a [React.Component][react-component]
+a [React.Component][react-component] (Component Injection)
 or just plain react elements.
 
 ## This solution
 
-`react-render-callback` frees you from detecting what kind of callback your component is dealing with:
+`react-render-callback` frees you from detecting what kind fo [`render prop`][render-prop]
+your component is dealing with:
 
 ```js
 import React from 'react'
+import renderCallback from 'react-render-callback'
 
-import render from 'react-render-callback'
-
+// children may be a function, a component, an element, ...
 class Component from React.Component {
   state = {}
 
   render() {
-    // can be any prop: return render(this.props.renderHeader, this.state.header)
-    return render(this.props.children, this.state)
+    // can be any prop like render, component, renderHeader, ...
+    return renderCallback(this.props.children, this.state)
   }
 }
 ```
 
-It can render the following types:
-
-- [Stateless Function Components (SFC)](https://reactjs.org/docs/components-and-props.html#functional-and-class-components)
-  with one argument (the common `props` case) aka _Render Props Pattern_
-  or [optional with several arguments](#use-createrender-to-pass-down-several-arguments)
-- [Class Components](https://reactjs.org/docs/react-component.html) aka _Component Injection Pattern_
-- [Context](https://reactjs.org/docs/context.html) Provider and Consumer
-- [Forward Refs](https://reactjs.org/docs/react-api.html#reactforwardref)
-- [Factories](https://reactjs.org/docs/react-api.html#createfactory)
-- [Elements](https://reactjs.org/docs/glossary.html#elements)
-  with [optional support](#use-optionscloneelement) for [cloning][clone-element] to merge props
-- primitives like strings, numbers, arrays, ...
-- `false`, `null`, `undefined` and `true` are returned as `null`
-  just like in [JSX](https://reactjs.org/docs/jsx-in-depth.html#booleans-null-and-undefined-are-ignored)
-
 View an example in [codesandbox.io](https://codesandbox.io/s/48k5p1r764?module=%2FApp.js).
+
+## Highlights
+
+- :package: Super tiny (~600 bytes)
+- :ok_hand: Dependency free (except for [Object.assign](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) polyfill)
+- :electric_plug: Plug and play
+- :crystal_ball: Tree shaking friendly (ESM, no side effects)
+- :books: Well documented
+- :100: test coverage
+- :family: supports rendering of
+  - [Stateless Function Components (SFC)](https://reactjs.org/docs/components-and-props.html#functional-and-class-components)
+    with one argument (the common `props` case) aka _Render Props_ aka _Function as Child_
+    or [optional with several arguments](#use-createrender-to-pass-down-several-arguments)
+  - [Class Components](https://reactjs.org/docs/react-component.html) aka _Component Injection_
+  - [Context](https://reactjs.org/docs/context.html) Provider and Consumer
+  - [Forward Refs](https://reactjs.org/docs/react-api.html#reactforwardref)
+  - [Factories](https://reactjs.org/docs/react-api.html#createfactory)
+  - [Elements](https://reactjs.org/docs/glossary.html#elements)
+    with [optional support](#use-optionscloneelement) for [cloning][clone-element] to merge props
+  - primitives like strings, numbers, arrays, ...
+  - `false`, `null`, `undefined` and `true` are returned as `null`
+    just like in [JSX](https://reactjs.org/docs/jsx-in-depth.html#booleans-null-and-undefined-are-ignored)
 
 ## Table of Contents
 
@@ -104,15 +110,15 @@ via [unpkg.com](https://unpkg.com/) and exposed as `ReactRenderCallback`.
 
 ### API
 
-#### `render([ renderable [, props [, options ] ] ])`
+#### `renderCallback([ renderable [, props [, options ] ] ])`
 
 > renders the given `renderable` with `props`
 
 ```js
 // esm
-import render from 'react-render-callback'
+import renderCallback from 'react-render-callback'
 // commonjs
-const render = require('react-render-callback')
+const renderCallback = require('react-render-callback')
 ```
 
 **renderable** (optional): anything that can be rendered like a function, a component, or elements
@@ -141,10 +147,10 @@ const render = require('react-render-callback')
   the element using [`React.cloneElement`][clone-element]
 
 ```js
-render(<a href="#bar">bar</a>, {title: 'foo'})
+renderCallback(<a href="#bar">bar</a>, {title: 'foo'})
 // --> <a href="#bar">bar</a>
 
-render(<a href="#bar">bar</a>, {title: 'foo'}, {cloneElement: true})
+renderCallback(<a href="#bar">bar</a>, {title: 'foo'}, {cloneElement: true})
 // --> <a href="#bar" title="foo">bar</a>
 ```
 
@@ -167,21 +173,21 @@ import {createRender} from 'react-render-callback'
 const {createRender} = require('react-render-callback')
 ```
 
-Accepts the same arguments (except `props`) as `render()`. It exists mainly
+Accepts the same arguments (except `props`) as `renderCallback()`. It exists mainly
 to pre-determine (read cache) what type `renderable` is, to prevent these
 checks on every invocation.
 
 Additionally the returned method accepts more than one argument (since: v1.2.0).
-This allows to provide several parameters to the render function.
+This allows to provide several parameters to the `renderable`.
 
 ```js
-const render = createRender((a, b, c) => ({a, b, c}))
-render(1, 2, 3)
+const renderCallback = createRender((a, b, c) => ({a, b, c}))
+renderCallback(1, 2, 3)
 // -> { a: 1, b: 2, c: 3 }
 ```
 
-If only one argument is passed and it is a plain object, that argument is merged
-with (if defined) the `defaultProps` of the `renderable`.
+> If the `renderable` has a `defaultProps` property only the first parameter is used
+> and merged with the `defaultProps`.
 
 **returns**
 
@@ -301,7 +307,7 @@ const App = () => <Toggle>{ToggleView}</Toggle>
 
 ## Other Solutions
 
-- [`render-props`](https://github.com/donavon/render-props)
+- [`render-props`](https://www.npmjs.com/package/render-props)
 - [`react-render-function`](https://www.npmjs.com/package/react-render-function)
 - [`@macklinu/render-props`](https://www.npmjs.com/package/@macklinu/render-props)
 

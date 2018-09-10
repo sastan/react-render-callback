@@ -1,7 +1,7 @@
 {
   "name": "react-render-callback",
   "version": "0.0.0-semantically-released",
-  "description": "render anything (Function as Child, Render Props, Components, Elements, ...)",
+  "description": "render-prop helper to render anything (Functions, Components, Elements, ...)",
   "homepage": "https://github.com/sastan/react-render-callback#readme",
   "main": "dist/react-render-callback.cjs.js",
   "module": "dist/react-render-callback.esm.js",
@@ -66,9 +66,11 @@
   ],
   "keywords": [
     "react",
-    "render-props",
     "render-prop",
-    "function-as-child"
+    "render-props",
+    "function-as-child",
+    "component-injection",
+    "facc"
   ],
   "publishConfig": {
     "access": "public"
