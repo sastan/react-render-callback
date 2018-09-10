@@ -36,12 +36,12 @@ your component is dealing with:
 import React from 'react'
 import renderCallback from 'react-render-callback'
 
-// children may be a function, a component, an element, ...
 class Component from React.Component {
   state = {}
 
   render() {
     // can be any prop like render, component, renderHeader, ...
+    // children may be a function, a component, an element, ...
     return renderCallback(this.props.children, this.state)
   }
 }
@@ -139,11 +139,11 @@ const renderCallback = require('react-render-callback')
 - gracefully handles other types like string, array,
   [react elements][create-element], ...
 
-**props** (optional): to pass to `renderable` (if renderable is a function or react element type)
+**props** (optional): to pass to `renderable`
 
 **options** (optional):
 
-- `cloneElement` (default: `false`, since: v1.1.0): allows to pass props to
+- `cloneElement` (default: `false`, since: v1.1.0): allows to pass `props` to
   the element using [`React.cloneElement`][clone-element]
 
 ```js
@@ -156,6 +156,7 @@ renderCallback(<a href="#bar">bar</a>, {title: 'foo'}, {cloneElement: true})
 
 **returns**
 
+- the created react element
 - `false`, `null`, `undefined` and `true` are returned as `null`
   just like in [JSX](https://reactjs.org/docs/jsx-in-depth.html#booleans-null-and-undefined-are-ignored)
 - the value as is for all other values
@@ -191,7 +192,7 @@ renderCallback(1, 2, 3)
 
 **returns**
 
-a function (`(...args) => ...`)
+a function (`(...args) => ...`) to render the args
 
 ### Examples
 
@@ -201,8 +202,8 @@ A basic example showing the most common use cases can be viewed/edited at [codes
 
 [![Edit](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/mj5py581oy)
 
-> This option allows to pass down props without to need to create a function
-> within render which merges the parent and received props.
+> This option allows to pass down `props` without to need to create a function
+> within render which merges the defined and provided props.
 
 ```js
 class CountSeconds extends React.Component {
@@ -281,23 +282,29 @@ const App = () => (
 )
 ```
 
-#### Use `createRender` to interop with a library which only supports function as render-prop
+#### Use `createRender` to interop with a library which only supports functions as render-prop
 
 [![Edit](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/1qyqwq14jq)
 
 ```js
 import Toggle from 'react-toggled'
 
-const Toggler = ({on, getTogglerProps, onLabel, offLabel}) => (
-  <div>
-    <button {...getTogglerProps()}>Toggle me</button>
-    <div>{on ? onLabel : offLabel}</div>
-  </div>
-)
+class Toggler extends React.Component {
+  static defaultProps = {
+    onLabel: 'Toggled On',
+    offLabel: 'Toggled Off',
+  }
 
-Toggler.defaultProps = {
-  onLabel: 'Toggled On',
-  offLabel: 'Toggled Off',
+  render() {
+    const {on, getTogglerProps, onLabel, offLabel} = this.props
+
+    return (
+      <div>
+        <button {...getTogglerProps()}>Toggle me</button>
+        <div>{on ? onLabel : offLabel}</div>
+      </div>
+    )
+  }
 }
 
 const ToggleView = createRender(Toggler)
