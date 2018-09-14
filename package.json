@@ -20,10 +20,11 @@
     "add-contributor": "kcd-scripts contributors add",
     "build": "kcd-scripts build --bundle --no-clean --size-snapshot",
     "lint": "kcd-scripts lint",
+    "bundlesize": "bundlesize",
     "test": "kcd-scripts test",
     "test:cover": "kcd-scripts test --coverage",
     "test:update": "npm test -- --updateSnapshot --coverage",
-    "test:build": "jest --projects other/misc-tests",
+    "test:build": "jest --projects other/misc-tests && npm run bundlesize",
     "flowgen": "flowgen typings/index.d.ts -o flow-typed/npm/react-render-callback_v1.x.x.js.flow",
     "build-and-test": "npm run build -s && npm run test:build -s",
     "validate": "kcd-scripts validate lint,test:cover,build-and-test",
@@ -45,6 +46,7 @@
     "@types/react": "^0.14 || ^15 || ^16",
     "ajv": "^6.5.3",
     "babel-plugin-dynamic-import-node": "^2.1.0",
+    "bundlesize": "^0.17.0",
     "flowgen": "^1.2.2",
     "kcd-scripts": "^0.44.0",
     "react": "^0.14 || ^15 || ^16",
@@ -64,6 +66,12 @@
     "dist",
     "flow-typed",
     "typings"
+  ],
+  "bundlesize": [
+    {
+      "path": "dist/react-render-callback.umd.min.js",
+      "maxSize": "650 B"
+    }
   ],
   "keywords": [
     "react",

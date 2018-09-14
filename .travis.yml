@@ -22,7 +22,7 @@ install:
   - npm install
   - npm ls react
 script:
-  - kcd-scripts validate lint,test:cover,build-and-test
+  - npm run validate
 after_success: kcd-scripts travis-after-success
 branches:
   except:

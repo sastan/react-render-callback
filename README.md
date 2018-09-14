@@ -51,7 +51,7 @@ View an example in [codesandbox.io](https://codesandbox.io/s/48k5p1r764?module=%
 
 ## Highlights
 
-- :package: Super tiny (~600 bytes)
+- :package: Super tiny (~650 bytes)
 - :ok_hand: Dependency free (except for [Object.assign](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) polyfill)
 - :electric_plug: Just Works <sup>TM</sup>
 - :crystal_ball: Tree shaking friendly (ESM, no side effects)
