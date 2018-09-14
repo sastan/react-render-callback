@@ -21,7 +21,7 @@ export default renderable => {
 
   return (
     type === 'object' &&
-    renderable.$$typeof !== undefined &&
+    renderable.$$typeof &&
     (renderable.$$typeof === REACT_PROVIDER_TYPE ||
       renderable.$$typeof === REACT_CONTEXT_TYPE ||
       renderable.$$typeof === REACT_FORWARD_REF_TYPE)
