@@ -1,4 +1,5 @@
 import React from 'react'
+import semver from 'semver'
 
 import render from './render'
 
@@ -8,24 +9,28 @@ describe('render([renderable[, props]])', () => {
     expect(render()).toBeNull()
   })
 
-  it('should return strings as is', () => {
-    expect(render('div')).toBe('div')
-  })
+  if (semver.satisfies(React.version, '>=16.0.0-0')) {
+    it('should return strings as is', () => {
+      expect(render('div')).toBe('div')
+    })
 
-  it('should return array as is', () => {
-    const renderable = []
-    expect(render(renderable)).toBe(renderable)
-  })
+    it('should return array as is', () => {
+      const renderable = []
+      expect(render(renderable)).toBe(renderable)
+    })
+  }
 
   it('should return elements as is', () => {
     const renderable = <div />
     expect(render(renderable)).toBe(renderable)
   })
 
-  it('should return fragments as is', () => {
-    const renderable = <React.Fragment />
-    expect(render(renderable)).toBe(renderable)
-  })
+  if (React.Fragment) {
+    it('should return fragments as is', () => {
+      const renderable = <React.Fragment />
+      expect(render(renderable)).toBe(renderable)
+    })
+  }
 
   it('should clone element providing additional props', () => {
     const renderable = <a href="#bar">bar</a>
@@ -43,9 +48,17 @@ describe('render([renderable[, props]])', () => {
   it('should not clone element by default', () => {
     const renderable = <a href="#bar">bar</a>
 
-    expect(render(renderable, {title: 'foo'})).toBe(renderable)
+    expect(
+      render(renderable, {
+        title: 'foo',
+      }),
+    ).toBe(renderable)
 
-    expect(render(renderable, {title: 'foo'})).toMatchInlineSnapshot(`
+    expect(
+      render(renderable, {
+        title: 'foo',
+      }),
+    ).toMatchInlineSnapshot(`
 <a
   href="#bar"
 >
@@ -76,51 +89,75 @@ describe('render([renderable[, props]])', () => {
       }
     }
 
-    expect(render(Renderable, {foo: 'bar'})).toMatchInlineSnapshot(`
+    expect(
+      render(Renderable, {
+        foo: 'bar',
+      }),
+    ).toMatchInlineSnapshot(`
 <Renderable
   foo="bar"
 />
 `)
   })
 
-  it('should create an element for an React.Context.Provider', () => {
-    const {Provider} = React.createContext()
-    expect(render(Provider, {value: 'baz'})).toMatchInlineSnapshot(`
+  if (React.createContext) {
+    it('should create an element for an React.Context.Provider', () => {
+      const {Provider} = React.createContext()
+      expect(
+        render(Provider, {
+          value: 'baz',
+        }),
+      ).toMatchInlineSnapshot(`
 <Context.Provider
   value="baz"
 />
 `)
-  })
+    })
 
-  it('should create an element for an React.Context.Consumer', () => {
-    const {Consumer} = React.createContext()
-    expect(render(Consumer, {children: jest.fn()})).toMatchInlineSnapshot(`
+    it('should create an element for an React.Context.Consumer', () => {
+      const {Consumer} = React.createContext()
+      expect(
+        render(Consumer, {
+          children: jest.fn(),
+        }),
+      ).toMatchInlineSnapshot(`
 <Context.Consumer>
   [MockFunction]
 </Context.Consumer>
 `)
-  })
+    })
+  }
 
   it('should create an element for a factory (React.createFactory)', () => {
     const div = React.createFactory('div')
-    expect(render(div, {title: 'foo'})).toMatchInlineSnapshot(`
+    expect(
+      render(div, {
+        title: 'foo',
+      }),
+    ).toMatchInlineSnapshot(`
 <div
   title="foo"
 />
 `)
   })
 
-  it('should create an element for forward ref component (React.forwardRef)', () => {
-    const forwardRef = React.forwardRef((props, ref) => (
-      <div {...props} ref={ref} />
-    ))
+  if (React.forwardRef) {
+    it('should create an element for forward ref component (React.forwardRef)', () => {
+      const forwardRef = React.forwardRef((props, ref) => (
+        <div {...props} ref={ref} />
+      ))
 
-    expect(render(forwardRef, {children: 'foo'})).toMatchInlineSnapshot(`
+      expect(
+        render(forwardRef, {
+          children: 'foo',
+        }),
+      ).toMatchInlineSnapshot(`
 <ForwardRef>
   foo
 </ForwardRef>
 `)
-  })
+    })
+  }
 
   it('should invoke arrow function', () => {
     const props = {foo: 'bar'}
@@ -210,7 +247,11 @@ Object {
     describe('return null for', () => {
       ;[false, null, undefined, true].forEach(value => {
         it(`${value}`, () => {
-          expect(render(SFC, {value})).toBeNull()
+          expect(
+            render(SFC, {
+              value,
+            }),
+          ).toBeNull()
         })
       })
     })
@@ -218,7 +259,11 @@ Object {
     describe('return value', () => {
       ;['', 0, NaN].forEach(value => {
         it(`${value}`, () => {
-          expect(render(SFC, {value})).toBe(value)
+          expect(
+            render(SFC, {
+              value,
+            }),
+          ).toBe(value)
         })
       })
     })
@@ -259,7 +304,11 @@ Object {
       function Renderable() {}
       Renderable.propTypes = {}
 
-      expect(render(Renderable, {foo: 'bar'})).toMatchInlineSnapshot(`
+      expect(
+        render(Renderable, {
+          foo: 'bar',
+        }),
+      ).toMatchInlineSnapshot(`
 <Renderable
   foo="bar"
 />
@@ -270,7 +319,11 @@ Object {
       const Renderable = () => {}
       Renderable.propTypes = {}
 
-      expect(render(Renderable, {foo: 'bar'})).toMatchInlineSnapshot(`
+      expect(
+        render(Renderable, {
+          foo: 'bar',
+        }),
+      ).toMatchInlineSnapshot(`
 <Renderable
   foo="bar"
 />

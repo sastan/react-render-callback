@@ -9,7 +9,18 @@ notifications:
 node_js:
   - 10
   - 8
-install: npm install
+env: 
+  matrix:
+    - REACT_VERSION="^16.3.0"
+    - REACT_VERSION=">=16.0.0 <16.3.0"
+    - REACT_VERSION="^15.4.0"
+    - REACT_VERSION=">=15.0.0 <15.4.0"
+    - REACT_VERSION="^0.14"
+    - REACT_VERSION="latest"
+install: 
+  - npm install --no-save "react@${REACT_VERSION}"
+  - npm install
+  - npm ls react
 script:
   - kcd-scripts validate lint,test:cover,build-and-test
 after_success: kcd-scripts travis-after-success

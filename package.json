@@ -18,7 +18,7 @@
   },
   "scripts": {
     "add-contributor": "kcd-scripts contributors add",
-    "build": "kcd-scripts build --bundle --no-clean --size-snapshot && npm run flowgen",
+    "build": "kcd-scripts build --bundle --no-clean --size-snapshot",
     "lint": "kcd-scripts lint",
     "test": "kcd-scripts test",
     "test:cover": "kcd-scripts test --coverage",
@@ -35,21 +35,22 @@
   },
   "sideEffects": false,
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0-0 || ^16.0.0-0"
+    "react": "^0.14 || ^15 || ^16"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.0.0",
-    "@types/react": "^16.4.2",
+    "@types/react": "^0.14 || ^15 || ^16",
     "ajv": "^6.5.3",
     "babel-plugin-dynamic-import-node": "^2.1.0",
     "flowgen": "^1.2.2",
-    "react": "^16.4.2",
     "kcd-scripts": "^0.44.0",
+    "react": "^0.14 || ^15 || ^16",
+    "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-commonjs": "^9.1.0",
-    "rollup-plugin-babel": "^4.0.3"
+    "semver": "^5.5.1"
   },
   "eslintConfig": {
     "extends": "./node_modules/kcd-scripts/eslint.js"

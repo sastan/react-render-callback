@@ -1,7 +1,7 @@
 import React from 'react'
 
-React.createContext = undefined
-React.forwardRef = undefined
+if (React.createContext) delete React.createContext
+if (React.forwardRef) delete React.forwardRef
 
 let reactSymbols
 
@@ -12,9 +12,9 @@ beforeAll(async () => {
 test('react symbols before v16.3.0', () => {
   expect(reactSymbols).toMatchInlineSnapshot(`
 Object {
-  "REACT_CONTEXT_TYPE": undefined,
-  "REACT_FORWARD_REF_TYPE": undefined,
-  "REACT_PROVIDER_TYPE": undefined,
+  "REACT_CONTEXT_TYPE": false,
+  "REACT_FORWARD_REF_TYPE": false,
+  "REACT_PROVIDER_TYPE": false,
 }
 `)
 })

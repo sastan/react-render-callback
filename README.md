@@ -53,10 +53,11 @@ View an example in [codesandbox.io](https://codesandbox.io/s/48k5p1r764?module=%
 
 - :package: Super tiny (~600 bytes)
 - :ok_hand: Dependency free (except for [Object.assign](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) polyfill)
-- :electric_plug: Plug and play
+- :electric_plug: Just Works <sup>TM</sup>
 - :crystal_ball: Tree shaking friendly (ESM, no side effects)
 - :books: Well documented
 - :100: test coverage
+- :sunny: supports React v0.14, v15 and v16
 - :family: supports rendering of
   - [Stateless Function Components (SFC)](https://reactjs.org/docs/components-and-props.html#functional-and-class-components)
     with one argument (the common `props` case) aka _Render Props_ aka _Function as Child_
