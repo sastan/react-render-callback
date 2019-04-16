@@ -48,7 +48,7 @@
     "babel-plugin-dynamic-import-node": "^2.1.0",
     "bundlesize": "^0.17.0",
     "flowgen": "^1.2.2",
-    "kcd-scripts": "^0.44.0",
+    "kcd-scripts": "^1.2.1",
     "react": "^0.14 || ^15 || ^16",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-commonjs": "^9.1.0",
