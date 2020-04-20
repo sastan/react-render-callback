@@ -45,7 +45,7 @@
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@types/react": "^0.14 || ^15 || ^16",
     "ajv": "^6.5.3",
-    "babel-plugin-dynamic-import-node": "^2.1.0",
+    "babel-plugin-dynamic-import-node": "^2.3.2",
     "bundlesize": "^0.17.0",
     "flowgen": "^1.2.2",
     "kcd-scripts": "^0.44.0",
